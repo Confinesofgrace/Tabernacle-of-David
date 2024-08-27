@@ -1,34 +1,3 @@
-<template>
-  <div id="ourcollection-frame">
-    <div id="ourcollection-display">
-      <h2>Our Collection</h2>
-      <div v-if="lyricsList.length" class="lyrics-grid">
-
-        <!-- 
-        I removed the index- it was flagging it as 'defined but never used'
-        
-        <div v-for="(lyric, index) in lyricsList" :key="lyric.id" class="lyric-item"> 
-        
-        
-        -->
-        <div v-for="(lyric) in lyricsList" :key="lyric.id" class="lyric-item">
-          <h3>{{ lyric.title }}</h3>
-          <p><strong>Written by:</strong> {{ lyric.composer }}</p>
-          <p>{{ lyric.lyrics }}</p>
-
-          <div> 
-            <button @click="editLyric(lyric)" class="edit-button">Edit</button>
-            <button @click="deleteLyric(lyric.id)" class="delete-button">Delete</button>
-          </div>
-          
-        </div>
-      </div>
-      <div v-else>
-        <p>No lyrics available. Upload some lyrics to see them here.</p>
-      </div>
-    </div>
-  </div>
-</template>
 
 <script>
 import { db } from '../Firebase.js';
@@ -76,10 +45,52 @@ export default {
           alert("Failed to delete lyric.");
         }
       }
-    }
+    },
+
+    viewLyrics(lyric) {
+    this.$router.push({ 
+      path: `/lyrics/${lyric.id}`,
+    });
+  },
+    
+
   }
 };
 </script>
+
+
+
+<template>
+  <div id="ourcollection-frame">
+    <div id="ourcollection-display">
+      <h2>Our Collection</h2>
+      <div v-if="lyricsList.length" class="lyrics-grid">
+
+        <!-- 
+        I removed the index- it was flagging it as 'defined but never used'
+        
+        <div v-for="(lyric, index) in lyricsList" :key="lyric.id" class="lyric-item"> 
+        
+        
+        -->
+        <div v-for="(lyric) in lyricsList" :key="lyric.id" class="lyric-item" @click="viewLyrics(lyric)">
+          <h3>{{ lyric.title }}</h3>
+          <p><strong>Written by:</strong> {{ lyric.composer }}</p>
+          <p>{{ lyric.lyrics.slice(0, 100) }}...</p>
+          <div style="display: flex;"> 
+            <button @click.stop="editLyric(lyric)" class="edit-button">Edit</button>
+            <button @click.stop="deleteLyric(lyric.id)" class="delete-button"> 
+              <Icon icon="iconoir:delete-circle" style="font-size: 30px;"/>Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <p>No lyrics available. Upload some lyrics to see them here.</p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 #ourcollection-frame 
@@ -118,14 +129,18 @@ h2 {
 
 .delete-button 
 {
-  background-color: #e74c3c;
-  color: white;
+  /*background-color: #e74c3c; */
+
+  display: flex;
+  align-items: center;
+  color: rgb(7, 7, 7);
   border: none;
-  padding: 8px 12px;
+  padding: 8px 24px;
   border-radius: 8px;
   cursor: pointer;
   
   font-size: 12px;
+
 }
 
 .delete-button:hover 
@@ -138,7 +153,7 @@ h2 {
   background-color: #2bc050;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 24px;
   border-radius: 8px;
   cursor: pointer;
   

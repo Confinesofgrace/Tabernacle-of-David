@@ -35,7 +35,7 @@ nav
 {
     display: flex;
     align-items: center;
-    padding: 40px;
+    padding: 40px 80px;
 
     background-color: whitesmoke;
 }
@@ -48,15 +48,15 @@ nav
 
 #nav-logo
 {
-    width: 10%;
+    width: 20%;    
 }
 
 #nav-center
 {
-    width: 90%;
     display: flex;
-    justify-content: center;
+    
     align-items: center;
+    padding: 0px 40px;
     
     flex-wrap: wrap;
     gap: 50px;

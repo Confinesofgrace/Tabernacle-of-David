@@ -38,6 +38,14 @@ const router = createRouter({
       props: route => ({ lyric: route.params.lyric })
     },
 
+    {
+      path: '/lyrics/:id',
+      name: 'lyrics',
+      component: () => import('../views/Lyrics.vue'),
+      props: true,
+    },
+    
+
   ]
 })
 
