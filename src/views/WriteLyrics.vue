@@ -3,7 +3,11 @@
     <div id="writelyrics-display">
       <input type="text" v-model="songTitle" placeholder="Song title" style="width:40%;margin-right:37%;" />
       <input type="text" v-model="composer" placeholder="Written by:" />
+
+      
+
       <div><textarea v-model="lyrics" placeholder="Enter lyrics here" style="width:100%; height:350px; margin-top:20px;" /></div>
+      
       <RouterLink to='/our-collection'> 
         <button @click="saveLyrics">Save Lyrics</button> 
       </RouterLink>
@@ -14,6 +18,7 @@
 <script>
 import { db } from '../Firebase.js';
 import { doc, updateDoc, addDoc, collection } from "firebase/firestore"; 
+
 
 export default {
   data() {

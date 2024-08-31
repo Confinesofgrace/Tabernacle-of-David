@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/starter-kit": "^2.6.6",
+    "@tiptap/vue-3": "^2.6.6",
     "firebase": "^10.13.0",
+    "quill": "^2.0.2",
+    "simplemde": "^1.11.2",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
