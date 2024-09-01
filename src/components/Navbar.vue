@@ -17,6 +17,8 @@
             
         
         </div>
+
+        <div id="hamburger"> Menu </div>
         
 
     </nav>
@@ -48,7 +50,7 @@ nav
 
 #nav-logo
 {
-    width: 20%;    
+    /*background-color: yellow;*/
 }
 
 #nav-center
@@ -58,7 +60,26 @@ nav
     align-items: center;
     padding: 0px 40px;
     
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     gap: 50px;
+    /*background-color: green;*/
+}
+
+#hamburger
+{
+    display: none
+}
+
+@media (max-width: 950px) 
+{
+    #nav-center
+    {
+        display: none;
+    }
+
+    #hamburger
+    {
+        display: flex;
+    }
 }
 </style>
