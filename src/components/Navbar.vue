@@ -23,10 +23,10 @@ const ToggleMenu = () => {
         </div>
         
         <div id="nav-center" :class="{ active: is_expanded }"> 
-            <RouterLink to="/about"><div id="navs">About</div></RouterLink> 
-            <RouterLink to="/our-lyrics"><div id="navs">Our Lyrics</div></RouterLink>
-            <RouterLink to="/our-collection"><div id="navs">Our Collection</div></RouterLink>
-            <RouterLink to="/write-lyrics"><div id="navs">Write Lyrics</div></RouterLink>    
+            <RouterLink to="/about"><div id="navs" @click="ToggleMenu" :class="{ active: is_expanded }">About</div></RouterLink> 
+            <RouterLink to="/our-lyrics"><div id="navs" @click="ToggleMenu" :class="{ active: is_expanded }">Our Lyrics</div></RouterLink>
+            <RouterLink to="/our-collection" @click="ToggleMenu" :class="{ active: is_expanded }"><div id="navs">Our Collection</div></RouterLink>
+            <RouterLink to="/write-lyrics" @click="ToggleMenu" :class="{ active: is_expanded }"><div id="navs">Write Lyrics</div></RouterLink>    
         </div>
     </nav>
 </template>
@@ -52,7 +52,10 @@ nav
 
 #nav-logo #shortened
 {
-    display: none;
+    position: fixed;
+    left: -100%;
+        
+        
 }
 
 #nav-center 
@@ -82,6 +85,7 @@ nav
         gap: 30px;
         background-color: whitesmoke;
         text-align: center;
+        z-index: 999;
         transition: 0.3s;
     }
 
@@ -109,15 +113,18 @@ nav
     #hamburger.active hr:nth-child(1) 
     {
         transform: translateY(10px) rotate(45deg);
+        transition: 0.3s;
     }
 
     #hamburger.active hr:nth-child(3) 
     {
         transform: translateY(-10px) rotate(-45deg);
+        transition: 0.3s;
     }
 
-    hr {
-        width: 20px;
+    hr 
+    {
+        width: 16px;
     }
 
     hr 
@@ -143,16 +150,22 @@ nav
         justify-content: space-around;
         align-items: center;
         font-size: 14px;
+        transition: 0.3s;
     }
 
     #nav-logo #shortened
     {
-        display: flex;
+        left: 20%;
+        top: 40px;
+        transition: 0.3s;
     }
 
     #nav-logo #full-name
     {
-        display: none;
+        /*display: none;*/
+        position: fixed;
+        left: -100%;
+        transition: 0.3s;
     }
 }
 </style>
