@@ -1,118 +1,158 @@
-<script></script>
+<script setup>
+import { ref } from 'vue';
 
+const is_expanded = ref(false);
+
+const ToggleMenu = () => {
+    is_expanded.value = !is_expanded.value;
+};
+</script>
 
 <template>
     <nav>
-
         <!-- Padding of 40px for the Nav-->
-
-        <div id="nav-logo"> 
-            <RouterLink to="/"> <h2>Tabernacle of David</h2> </RouterLink> 
+        <div id="nav-logo">
+            <RouterLink to="/"> <h2 id="shortened">T o D</h2> </RouterLink>
+            <RouterLink to="/"> <h2 id="full-name">Tabernacle of David</h2> </RouterLink>
             
-            <div id="hamburger"> 
+            <div id="hamburger" @click="ToggleMenu" :class="{ active: is_expanded }"> 
                 <hr id="hr-1">
                 <hr id="hr-2">
                 <hr id="hr-3">
             </div>
         </div>
         
-        <div id="nav-center"> 
-
-            <RouterLink to="/about" ><div id="navs">About</div></RouterLink> 
-            <RouterLink to="/our-lyrics"> <div id="navs">Our Lyrics</div> </RouterLink>
-            <RouterLink to="/our-collection"> <div id="navs"> Our Collection</div></RouterLink>
-            <RouterLink to="/write-lyrics"> <div id="navs"> Write Lyrics</div></RouterLink>    
-        
+        <div id="nav-center" :class="{ active: is_expanded }"> 
+            <RouterLink to="/about"><div id="navs">About</div></RouterLink> 
+            <RouterLink to="/our-lyrics"><div id="navs">Our Lyrics</div></RouterLink>
+            <RouterLink to="/our-collection"><div id="navs">Our Collection</div></RouterLink>
+            <RouterLink to="/write-lyrics"><div id="navs">Write Lyrics</div></RouterLink>    
         </div>
-
-        
-        
-
     </nav>
-
 </template>
 
-
-
 <style scoped>
-a
+a 
 {
     color: black;
 }
 
-nav
+nav 
 {
     display: flex;
     align-items: center;
     padding: 40px 80px;
-
     background-color: whitesmoke;
 }
 
-#navs
+#navs 
 {
     display: flex;
-    
 }
 
-#nav-logo
+#nav-logo #shortened
 {
-    /*background-color: yellow;*/
+    display: none;
 }
 
-#nav-center
+#nav-center 
 {
     display: flex;
-    
     align-items: center;
     padding: 0px 40px;
-    
-    /*flex-wrap: wrap;*/
     gap: 50px;
     /*background-color: green;*/
 }
 
-#hamburger
+#hamburger 
 {
-    display: none
+    display: none;
 }
 
 @media (max-width: 950px) 
 {
-    #nav-center
+    #nav-center 
     {
-        display: none;
+        position: fixed;
+        left: -100%;
+        top: 120px;
+        right: 20%;
+        width: 60%;
+        flex-direction: column;
+        gap: 30px;
+        background-color: whitesmoke;
+        text-align: center;
+        transition: 0.3s;
     }
 
-    #hamburger
+    #nav-center.active 
+    {
+        left: 0;
+    }
+
+    #navs 
+    {
+        margin: 16px;
+    }
+
+    #hamburger 
     {
         display: block;
-        padding: 10px ;
+        cursor: pointer;
     }
 
-    hr
+    #hamburger.active hr:nth-child(2) 
     {
+        opacity: 0;
+    }
+
+    #hamburger.active hr:nth-child(1) 
+    {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    #hamburger.active hr:nth-child(3) 
+    {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    hr {
         width: 20px;
     }
 
-    /*
-    #hr-1
+    hr 
     {
-        width: 15px;
-    }
-    */
-
-    #hr-2
-    {
-        margin: 4px 0px;
+        margin: 8px 0px;
     }
 
-    #nav-logo
+    #nav-logo 
     {
         width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
+    }
+}
+
+@media (max-width: 600px) 
+{
+    #nav-logo 
+    {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    #nav-logo #shortened
+    {
+        display: flex;
+    }
+
+    #nav-logo #full-name
+    {
+        display: none;
     }
 }
 </style>
