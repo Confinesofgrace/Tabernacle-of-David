@@ -53,9 +53,7 @@ nav
 #nav-logo #shortened
 {
     position: fixed;
-    left: -100%;
-        
-        
+    left: -100%;  
 }
 
 #nav-center 
@@ -76,11 +74,12 @@ nav
 {
     #nav-center 
     {
+        padding: 30px 0px;
         position: fixed;
         left: -100%;
         top: 120px;
         right: 20%;
-        width: 60%;
+        width: 40%;
         flex-direction: column;
         gap: 30px;
         background-color: whitesmoke;
@@ -91,12 +90,7 @@ nav
 
     #nav-center.active 
     {
-        left: 0;
-    }
-
-    #navs 
-    {
-        margin: 16px;
+        left: 60%;
     }
 
     #hamburger 

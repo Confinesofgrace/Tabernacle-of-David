@@ -28,6 +28,12 @@
     justify-content: center;
     align-items: center;
 
+    background-image: url(/src/assets/pexels-jplenio-2957860.jpg);
+    background-size: cover;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+
   }
 
   #home-display
@@ -35,6 +41,7 @@
     
     width: 100%;
     height: 400px;
+    margin-bottom: 10%;
 
     display: flex;
     flex-direction: column;
