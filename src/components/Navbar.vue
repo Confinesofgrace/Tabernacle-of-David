@@ -77,7 +77,7 @@ nav
         padding: 30px 0px;
         position: fixed;
         left: -100%;
-        top: 120px;
+        top: 114px;
         right: 20%;
         width: 40%;
         flex-direction: column;
@@ -97,34 +97,37 @@ nav
     {
         display: block;
         cursor: pointer;
+    
+        /* Increase tap area*/
+        padding: 8px;
     }
 
     #hamburger.active hr:nth-child(2) 
     {
-        opacity: 0;
+        /*opacity: 0;*/
+        width: 12px;
+        transition: 0.3s;
     }
 
     #hamburger.active hr:nth-child(1) 
     {
-        transform: translateY(10px) rotate(45deg);
+        /*transform: translateY(10px) rotate(45deg);*/
+        width: 8px;
         transition: 0.3s;
     }
 
     #hamburger.active hr:nth-child(3) 
     {
-        transform: translateY(-10px) rotate(-45deg);
+        /*transform: translateY(-10px) rotate(-45deg);*/
         transition: 0.3s;
     }
 
     hr 
     {
         width: 16px;
+        margin: 3px 0px;
     }
 
-    hr 
-    {
-        margin: 8px 0px;
-    }
 
     #nav-logo 
     {

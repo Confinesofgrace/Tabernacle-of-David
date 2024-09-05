@@ -5,7 +5,7 @@
       <input type="text" v-model="composer" placeholder="Written by:" />
 
       
-
+      <Tiptap/>
       <div><textarea v-model="lyrics" placeholder="Enter lyrics here" style="width:100%; height:350px; margin-top:20px;" /></div>
       
       <RouterLink to='/our-collection'> 
@@ -18,9 +18,11 @@
 <script>
 import { db } from '../Firebase.js';
 import { doc, updateDoc, addDoc, collection } from "firebase/firestore"; 
+import Tiptap from '@/components/Tiptap.vue';
 
 
 export default {
+  components: { Tiptap },
   data() {
     return {
       songTitle: this.$route.query.title || '',
