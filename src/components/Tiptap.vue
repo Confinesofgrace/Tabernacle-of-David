@@ -1,4 +1,14 @@
 <template>
+    <div v-if="editor" style="background-color:yellow;padding: 10px;"> 
+        
+        <button
+  :class="{ 'is-active': editor.isActive('bold') }"
+  @click="editor.chain().focus().toggleBold().run()"
+>
+  Bold
+</button>
+
+    </div>
     <editor-content :editor="editor" />
   </template>
   
