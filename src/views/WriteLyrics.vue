@@ -4,6 +4,7 @@
       <input type="text" v-model="songTitle" placeholder="Song title" style="width:40%;margin-right:37%;" />
       <input type="text" v-model="composer" placeholder="Written by:" />
       
+      <!-- Bind Tiptap with the lyrics content -->
       <Tiptap v-model="lyrics" />
       
       <RouterLink to='/our-collection'> 
@@ -24,13 +25,12 @@ export default {
     return {
       songTitle: this.$route.query.title || '',
       composer: this.$route.query.composer || '',
-      lyrics: '', // HTML content will be stored
+      lyrics: this.$route.query.lyrics || '', // Bind the initial lyrics from query
       id: this.$route.query.id || null,
     };
   },
   methods: {
     async saveLyrics() {
-      // Save the full HTML content
       const htmlLyrics = this.lyrics;
       
       if (this.id) {
@@ -39,7 +39,7 @@ export default {
           await updateDoc(doc(db, "lyrics", this.id), {
             title: this.songTitle,
             composer: this.composer,
-            lyrics: htmlLyrics, // Save full HTML
+            lyrics: htmlLyrics, // Save full HTML content
             updatedAt: new Date()
           });
           alert('Lyrics updated successfully!');
@@ -53,7 +53,7 @@ export default {
           await addDoc(collection(db, "lyrics"), {
             title: this.songTitle,
             composer: this.composer,
-            lyrics: htmlLyrics, // Save full HTML
+            lyrics: htmlLyrics, // Save full HTML content
             createdAt: new Date()
           });
           alert('Lyrics uploaded successfully!');
@@ -110,5 +110,10 @@ button
   box-shadow: 2px 2px 4px rgba(14, 13, 13, 0.062);
 
   cursor: pointer;
+}
+
+.Prosemirror
+{
+  height: 70%;
 }
 </style>

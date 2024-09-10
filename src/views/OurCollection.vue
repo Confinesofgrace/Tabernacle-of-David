@@ -25,14 +25,14 @@ export default {
       });
     },
     editLyric(lyric) {
-    this.$router.push({ 
-      path: '/write-lyrics', 
-      query: {
-        id: lyric.id,
-        title: lyric.title,
-        composer: lyric.composer,
-        lyrics: lyric.lyrics
-      }
+  this.$router.push({ 
+    path: '/write-lyrics', 
+    query: {
+      id: lyric.id,
+      title: lyric.title,
+      composer: lyric.composer,
+      lyrics: lyric.lyrics // Pass full lyrics content (HTML)
+    }
     });
   },
     async deleteLyric(id) {
