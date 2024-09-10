@@ -76,7 +76,8 @@ export default {
         <div v-for="(lyric) in lyricsList" :key="lyric.id" class="lyric-item" @click="viewLyrics(lyric)">
           <h3>{{ lyric.title }}</h3>
           <p><strong>Written by:</strong> {{ lyric.composer }}</p>
-          <p>{{ lyric.lyrics.slice(0, 100) }}...</p>
+          <div v-html="lyric.lyrics.slice(0, 100)"></div>...
+         <!-- <p>{{ lyric.lyrics.slice(0, 100) }}...</p> --> 
           <div style="display: flex;"> 
             <button @click.stop="editLyric(lyric)" class="edit-button">Edit</button>
             <button @click.stop="deleteLyric(lyric.id)" class="delete-button"> 

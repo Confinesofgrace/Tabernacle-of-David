@@ -1,6 +1,7 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1><p>Zechariah 14 v 14-20</p></h1>
+    
   </div>
 </template>
 
@@ -10,6 +11,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }
 </style>

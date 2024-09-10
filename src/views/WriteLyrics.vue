@@ -3,10 +3,8 @@
     <div id="writelyrics-display">
       <input type="text" v-model="songTitle" placeholder="Song title" style="width:40%;margin-right:37%;" />
       <input type="text" v-model="composer" placeholder="Written by:" />
-
       
-      <Tiptap/>
-      <div><textarea v-model="lyrics" placeholder="Enter lyrics here" style="width:100%; height:350px; margin-top:20px;" /></div>
+      <Tiptap v-model="lyrics" />
       
       <RouterLink to='/our-collection'> 
         <button @click="saveLyrics">Save Lyrics</button> 
@@ -20,26 +18,28 @@ import { db } from '../Firebase.js';
 import { doc, updateDoc, addDoc, collection } from "firebase/firestore"; 
 import Tiptap from '@/components/Tiptap.vue';
 
-
 export default {
   components: { Tiptap },
   data() {
     return {
       songTitle: this.$route.query.title || '',
       composer: this.$route.query.composer || '',
-      lyrics: this.$route.query.lyrics || '',
+      lyrics: '', // HTML content will be stored
       id: this.$route.query.id || null,
     };
   },
   methods: {
     async saveLyrics() {
+      // Save the full HTML content
+      const htmlLyrics = this.lyrics;
+      
       if (this.id) {
         // Update existing document
         try {
           await updateDoc(doc(db, "lyrics", this.id), {
             title: this.songTitle,
             composer: this.composer,
-            lyrics: this.lyrics,
+            lyrics: htmlLyrics, // Save full HTML
             updatedAt: new Date()
           });
           alert('Lyrics updated successfully!');
@@ -53,7 +53,7 @@ export default {
           await addDoc(collection(db, "lyrics"), {
             title: this.songTitle,
             composer: this.composer,
-            lyrics: this.lyrics,
+            lyrics: htmlLyrics, // Save full HTML
             createdAt: new Date()
           });
           alert('Lyrics uploaded successfully!');
@@ -67,8 +67,9 @@ export default {
     }
   }
 };
-
 </script>
+
+
 
 <style scoped>
 #writelyrics-frame 
@@ -86,7 +87,7 @@ export default {
   gap: 50px;
 }
 
-input, textarea
+input
 {
   padding: 14px;
   border-style: none;
