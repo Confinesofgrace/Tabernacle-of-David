@@ -69,5 +69,12 @@
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 
+  @media (max-width: 950px)
+  {
+    h2
+    {
+      font-size: large;
+    }
+  }
 
 </style>
