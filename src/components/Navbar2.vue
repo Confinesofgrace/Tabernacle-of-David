@@ -13,6 +13,7 @@ const ToggleMenu = () => {
         <!-- Padding of 40px for the Nav-->
         <div id="nav-logo">
             <RouterLink to="/"> <h2 id="shortened">Tabernacle of David</h2> </RouterLink>
+            
             <RouterLink to="/"> <h2 id="full-name">Tabernacle of David</h2> </RouterLink>
             
             <div id="hamburger" @click="ToggleMenu" :class="{ active: is_expanded }"> 
@@ -58,9 +59,12 @@ nav
 
 #nav-center 
 {
+    
+    /*margin-left: 50px;*/
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0px 40px;
+    padding: 0px 60px;
     gap: 50px;
     /*background-color: green;*/
 }
@@ -131,20 +135,18 @@ nav
 
     #nav-logo 
     {
+        
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        
         align-items: center;
     }
-}
 
-@media (max-width: 600px) 
-{
     #nav-logo 
     {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-end;
         align-items: center;
         font-size: 14px;
         transition: 0.3s;
@@ -168,5 +170,8 @@ nav
         transition: 0.3s;
         
     }
+
 }
+/*@media (max-width: 600px) {} */
+
 </style>
