@@ -112,8 +112,5 @@ button
   cursor: pointer;
 }
 
-.Prosemirror
-{
-  height: 70%;
-}
+
 </style>
