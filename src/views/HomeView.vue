@@ -1,5 +1,6 @@
 <script setup>
   import { Icon } from '@iconify/vue';
+  
 
 </script>
 
@@ -14,6 +15,12 @@
         <h2> Find lyrics in Our Collection</h2>
         
         <input type="text" placeholder="Find Lyrics"/>
+
+        <div id="preview-collection">
+          
+          
+
+        </div>
       </div>
     </div>
   </main>

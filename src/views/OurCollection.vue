@@ -1,5 +1,5 @@
 
-<script>
+<script >
 import { db } from '../Firebase.js';
 import { collection, query, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { useRouter } from 'vue-router';
@@ -56,6 +56,7 @@ export default {
 
   }
 };
+
 </script>
 
 
@@ -97,11 +98,11 @@ export default {
 #ourcollection-frame 
 {
   padding: 20px;
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
 }
 
-h2 {
-  color: #333;
+h2 
+{
   margin-bottom: 20px;
 }
 
