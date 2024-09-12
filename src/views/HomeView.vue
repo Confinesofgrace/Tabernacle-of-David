@@ -1,5 +1,6 @@
 <script setup>
   import { Icon } from '@iconify/vue';
+  import PreviewCollection from './PreviewCollection.vue';
   
 
 </script>
@@ -15,12 +16,13 @@
         <h2> Find lyrics in Our Collection</h2>
         
         <input type="text" placeholder="Find Lyrics"/>
+        <!-- 
+          <div id="preview-collection">
+            <PreviewCollection/>
+          </div>  
+        -->
 
-        <div id="preview-collection">
-          
-          
-
-        </div>
+        
       </div>
     </div>
   </main>
@@ -29,7 +31,8 @@
 <style scoped>
   #home-frame
   {
-    
+    width: 100%;
+    height: 80vh;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -47,8 +50,7 @@
   {
     
     width: 100%;
-    height: 400px;
-    margin-bottom: 10%;
+    
 
     display: flex;
     flex-direction: column;
