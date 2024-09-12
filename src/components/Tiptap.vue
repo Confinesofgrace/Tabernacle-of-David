@@ -56,11 +56,14 @@ export default {
 <style >
   .ProseMirror
   {
+    height: 300px;
     padding: 14px;
     border-style: none;
     border: 1px solid rgba(66, 7, 228, 0.26);
     border-radius: 16px;
     box-shadow: 2px 2px 4px rgba(14, 13, 13, 0.062);
     outline: none;
+
+    overflow-y: auto;
   }
 </style>
