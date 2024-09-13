@@ -94,7 +94,12 @@ nav
 
     #nav-center.active 
     {
+        
         left: 60%;
+        align-items: flex-start;
+        padding-left:30px ;
+
+        
     }
 
     #hamburger 

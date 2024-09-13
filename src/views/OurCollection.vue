@@ -1,5 +1,4 @@
-
-<script >
+<script>
 import { db } from '../Firebase.js';
 import { collection, query, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { useRouter } from 'vue-router';
@@ -9,6 +8,7 @@ export default {
   data() {
     return {
       lyricsList: [],
+      searchQuery: '', // Store the search query
     };
   },
   mounted() {
@@ -19,22 +19,22 @@ export default {
       const q = query(collection(db, "lyrics"));
       onSnapshot(q, (querySnapshot) => {
         this.lyricsList = querySnapshot.docs.map(doc => ({
-          id: doc.id, 
-          ...doc.data()
+          id: doc.id,
+          ...doc.data(),
         }));
       });
     },
     editLyric(lyric) {
-  this.$router.push({ 
-    path: '/write-lyrics', 
-    query: {
-      id: lyric.id,
-      title: lyric.title,
-      composer: lyric.composer,
-      lyrics: lyric.lyrics // Pass full lyrics content (HTML)
-    }
-    });
-  },
+      this.$router.push({ 
+        path: '/write-lyrics', 
+        query: {
+          id: lyric.id,
+          title: lyric.title,
+          composer: lyric.composer,
+          lyrics: lyric.lyrics, // Pass full lyrics content (HTML)
+        }
+      });
+    },
     async deleteLyric(id) {
       if (confirm("Are you sure you want to delete this lyric?")) {
         try {
@@ -46,65 +46,98 @@ export default {
         }
       }
     },
-
     viewLyrics(lyric) {
-    this.$router.push({ 
-      path: `/lyrics/${lyric.id}`,
-    });
+      this.$router.push({ 
+        path: `/lyrics/${lyric.id}`,
+      });
+    },
   },
-    
-
-  }
+  computed: {
+    // Filter lyrics based on the search query
+    filteredLyrics() {
+      return this.lyricsList.filter(lyric => 
+        lyric.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        lyric.composer.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        lyric.lyrics.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+  },
 };
-
 </script>
-
-
 
 <template>
   <div id="ourcollection-frame">
     <div id="ourcollection-display">
       <h2>Our Collection</h2>
-      <div v-if="lyricsList.length" class="lyrics-grid">
+      <!-- Search input -->
+      <input 
+        type="text" 
+        v-model="searchQuery" 
+        placeholder="Find lyrics..." 
+      />
 
-        <!-- 
-        I removed the index- it was flagging it as 'defined but never used'
-        
-        <div v-for="(lyric, index) in lyricsList" :key="lyric.id" class="lyric-item"> 
-        
-        
-        -->
-        <div v-for="(lyric) in lyricsList" :key="lyric.id" class="lyric-item" @click="viewLyrics(lyric)">
-          <h3>{{ lyric.title }}</h3>
-          <p><strong>Written by:</strong> {{ lyric.composer }}</p>
+      
+      <div v-if="filteredLyrics.length" class="lyrics-grid">
+        <div v-for="lyric in filteredLyrics" :key="lyric.id" class="lyric-item" @click="viewLyrics(lyric)">
+          <div style="display: flex; align-items: baseline; gap: 30px;">
+            <h3 style="font-size: 18px;">{{ lyric.title }}</h3>
+            <p style="font-size: 16px;"><b>By:</b> {{ lyric.composer }}</p>
+          </div>
+          
           <div v-html="lyric.lyrics.slice(0, 100)"></div>...
-         <!-- <p>{{ lyric.lyrics.slice(0, 100) }}...</p> --> 
-          <div style="display: flex;"> 
+          <div style="display: flex; gap: 30px;"> 
             <button @click.stop="editLyric(lyric)" class="edit-button">Edit</button>
-            <button @click.stop="deleteLyric(lyric.id)" class="delete-button"> 
+            <button @click.stop="deleteLyric(lyric.id)" class="delete-button">
               <Icon icon="iconoir:delete-circle" style="font-size: 30px;"/>Delete
             </button>
           </div>
         </div>
       </div>
       <div v-else>
-        <p>No lyrics available. Upload some lyrics to see them here.</p>
+        <p>No lyrics match your search.</p>
       </div>
     </div>
   </div>
 </template>
 
+
 <style scoped>
 #ourcollection-frame 
 {
-  padding: 20px;
+  padding: 0px 80px;
   /*background-color: #f9f9f9;*/
+}
+
+#ourcollection-display
+{
+  padding: 20px 0px;
+  /*background-color: yellow;*/
 }
 
 h2 
 {
-  margin-bottom: 20px;
+  
+  font-size: 50px;
 }
+
+
+input
+  {
+    width: 60%;
+    padding: 10px 20px;
+    margin: 30px 0px;
+    border-style: none;
+    border: 1px solid rgba(66, 7, 228, 0.26);
+
+    border-radius: 16px;
+    outline: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m17 17l4 4M3 11a8 8 0 1 0 16 0a8 8 0 0 0-16 0'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 95%  ;
+
+    box-shadow: rgba(149, 157, 165, 0.137) 0px 4px 24px;
+  }
 
 .lyrics-grid {
   display: grid;
