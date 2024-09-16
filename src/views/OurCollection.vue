@@ -84,7 +84,7 @@ export default {
             <p><b>By:</b> {{ lyric.composer }}</p>
           </div>
           
-          <div v-html="lyric.lyrics.slice(0, 100)"></div>...
+          <div v-html="lyric.lyrics.slice(0, 100)" style="font-size: 12px;"></div>...
           <div style="display: flex; gap: 30px;"> 
             <button @click.stop="editLyric(lyric)" class="edit-button">Edit</button>
             <button @click.stop="deleteLyric(lyric.id)" class="delete-button">
