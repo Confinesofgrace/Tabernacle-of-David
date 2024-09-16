@@ -77,11 +77,11 @@ export default {
       />
 
       
-      <div v-if="filteredLyrics.length" class="lyrics-grid">
+      <div v-if="filteredLyrics.length" class="lyrics-grid" style="font-size: 12px;">
         <div v-for="lyric in filteredLyrics" :key="lyric.id" class="lyric-item" @click="viewLyrics(lyric)">
           <div style="display: flex; align-items: baseline; gap: 30px;">
-            <h3 style="font-size: 18px;">{{ lyric.title }}</h3>
-            <p style="font-size: 16px;"><b>By:</b> {{ lyric.composer }}</p>
+            <h3>{{ lyric.title }}</h3>
+            <p><b>By:</b> {{ lyric.composer }}</p>
           </div>
           
           <div v-html="lyric.lyrics.slice(0, 100)"></div>...
@@ -120,6 +120,15 @@ h2
   font-size: 50px;
 }
 
+h3 
+{
+  font-size: 18px;
+}
+
+p
+{
+  font-size: 16px;
+}
 
 input
   {
@@ -198,5 +207,13 @@ input
 .edit-button:hover 
 {
   background-color: #2bc050;
+}
+
+@media (max-width: 950px)
+{
+  h3, p
+  {
+    font-size: 12px;
+  }
 }
 </style>
